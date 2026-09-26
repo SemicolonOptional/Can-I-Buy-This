@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+  (function () {
+    var p = localStorage.getItem('theme-preference');
+    if (p === 'dark' || p === 'light') document.documentElement.setAttribute('data-theme', p);
+  })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in — Can I Buy This?</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap narrow">
+<div class="page">
+
+  <header>
+    <h1>Log in</h1>
+    <p>Access your affordability calculator.</p>
+  </header>
+
+  <div class="auth-card">
+    <p class="error-msg" id="error"></p>
+    <form id="login-form">
+      <div class="field-stack">
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" autocomplete="current-password" required>
+        </div>
+      </div>
+      <button type="submit" class="primary-btn" id="submit-btn">Log in</button>
+    </form>
+  </div>
+
+</div>
+<p class="auth-switch">No account yet? <a href="/signup.html">Sign up</a></p>
+</div>
+
+<script src="auth.js"></script>
+<script>
+  setupAuthForm({
+    formId: 'login-form',
+    endpoint: '/api/login',
+    submitId: 'submit-btn',
+    submitLabel: 'Log in',
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+  (function () {
+    var p = localStorage.getItem('theme-preference');
+    if (p === 'dark' || p === 'light') document.documentElement.setAttribute('data-theme', p);
+  })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can I Buy This?</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <span id="whoami"></span>
+  <div class="topbar-actions">
+    <div class="settings" id="settings">
+      <button type="button" class="icon-btn" id="settings-btn" aria-haspopup="true" aria-expanded="false">Settings</button>
+      <div class="settings-menu" id="settings-menu" hidden>
+        <p class="settings-label">Theme</p>
+        <div class="theme-options" id="theme-options">
+          <button type="button" data-theme-choice="light">Light</button>
+          <button type="button" data-theme-choice="dark">Dark</button>
+          <button type="button" data-theme-choice="system">System</button>
+        </div>
+      </div>
+    </div>
+    <button type="button" id="logout-btn">Log out</button>
+  </div>
+</div>
+
+<div class="wrap">
+<div class="page">
+
+  <header>
+    <h1>Can I buy this?</h1>
+    <p>Fill in your numbers to see if a purchase fits your budget.</p>
+  </header>
+
+  <form id="calc-form">
+
+    <div class="item-row">
+      <div class="field full">
+        <label for="item-name">What are you buying?</label>
+        <input type="text" id="item-name" placeholder="e.g. Laptop">
+      </div>
+      <div class="field price-field">
+        <label for="item-price">Price</label>
+        <div class="input-prefix">
+          <span>$</span>
+          <input type="number" id="item-price" min="0" step="1" required>
+        </div>
+      </div>
+    </div>
+
+    <fieldset>
+      <div class="legend-row">
+        <legend>Your finances</legend>
+        <span class="saved-note" id="saved-note"></span>
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="income">Monthly take-home income</label>
+          <div class="input-prefix"><span>$</span><input type="number" id="income" min="0" step="1" required></div>
+        </div>
+        <div class="field">
+          <label for="expenses">Monthly expenses</label>
+          <div class="input-prefix"><span>$</span><input type="number" id="expenses" min="0" step="1" required></div>
+        </div>
+        <div class="field">
+          <label for="savings">Current savings</label>
+          <div class="input-prefix"><span>$</span><input type="number" id="savings" min="0" step="1" required></div>
+        </div>
+        <div class="field">
+          <label for="debt">Monthly debt payments</label>
+          <div class="input-prefix"><span>$</span><input type="number" id="debt" min="0" step="1" value="0"></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div class="legend-row"><legend>This purchase</legend></div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="down-payment">How much will you put down?</label>
+          <div class="input-prefix"><span>$</span><input type="number" id="down-payment" min="0" step="1" value="0"></div>
+        </div>
+        <div class="field">
+          <label for="financing-toggle">Financing?</label>
+          <div class="yn" id="financing-toggle">
+            <button type="button" data-val="no" class="active">No</button>
+            <button type="button" data-val="yes">Yes</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-grid" id="financing-fields">
+        <div class="field">
+          <label for="rate">Interest rate</label>
+          <div class="input-suffix"><input type="number" id="rate" min="0" step="0.1" value="0"><span>%</span></div>
+        </div>
+        <div class="field">
+          <label for="term">Loan length</label>
+          <div class="input-suffix"><input type="number" id="term" min="0" step="1" value="0"><span>mo</span></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <button type="submit" class="primary-btn">Calculate</button>
+  </form>
+
+  <div id="result">
+    <div class="receipt">
+      <p class="receipt-title" id="r-title">$0 item</p>
+      <span class="verdict ok" id="r-verdict">Result</span>
+
+      <div class="line"><span class="k">Purchase price</span><span class="v" id="r-price">$0</span></div>
+      <div class="line"><span class="k">Monthly income</span><span class="v" id="r-income">$0</span></div>
+      <div class="line"><span class="k">Monthly expenses</span><span class="v" id="r-expenses">$0</span></div>
+      <div class="line"><span class="k">Current savings</span><span class="v" id="r-savings">$0</span></div>
+      <div class="line"><span class="k">After purchasing</span><span class="v" id="r-after-savings">$0 savings</span></div>
+      <div class="line"><span class="k">Monthly leftover income</span><span class="v" id="r-leftover">$0</span></div>
+      <div class="line total"><span class="k">Purchase = % of one month's income</span><span class="v" id="r-pct-income">0%</span></div>
+
+      <p class="note" id="r-note"></p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script src="theme.js"></script>
+<script src="calculator.js"></script>
+</body>
+</html>

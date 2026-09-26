@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+  (function () {
+    var p = localStorage.getItem('theme-preference');
+    if (p === 'dark' || p === 'light') document.documentElement.setAttribute('data-theme', p);
+  })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign up — Can I Buy This?</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap narrow">
+<div class="page">
+
+  <header>
+    <h1>Sign up</h1>
+    <p>Create an account to save your budget.</p>
+  </header>
+
+  <div class="auth-card">
+    <p class="error-msg" id="error"></p>
+    <form id="signup-form">
+      <div class="field-stack">
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" autocomplete="new-password" minlength="8" required>
+        </div>
+      </div>
+      <button type="submit" class="primary-btn" id="submit-btn">Create account</button>
+    </form>
+  </div>
+
+</div>
+<p class="auth-switch">Already have an account? <a href="/login.html">Log in</a></p>
+</div>
+
+<script src="auth.js"></script>
+<script>
+  setupAuthForm({
+    formId: 'signup-form',
+    endpoint: '/api/signup',
+    submitId: 'submit-btn',
+    submitLabel: 'Create account',
+  });
+</script>
+</body>
+</html>

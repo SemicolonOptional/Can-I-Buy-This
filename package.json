@@ -1,0 +1,16 @@
+{
+  "name": "can-i-buy-this",
+  "version": "0.1.0",
+  "description": "Affordability calculator with basic account login.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^18.0.3",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "pg": "^8.23.0"
+  }
+}
