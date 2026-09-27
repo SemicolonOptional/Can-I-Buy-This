@@ -1,11 +1,18 @@
 require('dotenv').config();
 const { Pool } = require('pg');
 
-console.log("Connecting with user:", process.env.DATABASE_URL ? process.env.DATABASE_URL.split('@')[0] : "NO DATABASE_URL FOUND");
+// Verify DATABASE_URL exists before initializing
+if (!process.env.DATABASE_URL) {
+  console.error("CRITICAL ERROR: DATABASE_URL environment variable is missing on Render!");
+} else {
+  console.log("Connecting with database host:", process.env.DATABASE_URL.split('@')[1] || "URL FOUND");
+}
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
+  ssl: { 
+    rejectUnauthorized: false 
+  },
   connectionTimeoutMillis: 10000
 });
 
